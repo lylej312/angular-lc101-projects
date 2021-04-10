@@ -12,6 +12,10 @@ export class AppComponent {
   width = 0;
   message = "Space shuttle ready for takeoff!";
   takeOffEnabled: boolean = true;
+  moveLeftEnabled: boolean = true;
+  moveRightEnabled: boolean = true;
+  moveUpEnabled: boolean = true;
+  moveDownEnabled: boolean = true;
 
   handleTakeOff(rocketImage) {
     let result = window.confirm(
@@ -49,6 +53,8 @@ export class AppComponent {
   }
 
   moveRocket(rocketImage, direction) {
+    let height = parseInt(rocketImage.style.bottom);
+    let leftAndRight = parseInt(rocketImage.style.left);
     if (direction === "right") {
       let movement = parseInt(rocketImage.style.left) + 10 + "px";
       rocketImage.style.left = movement;
@@ -64,7 +70,7 @@ export class AppComponent {
       rocketImage.style.bottom = movement;
       this.height = this.height + 10000;
       this.handleBounds(rocketImage);
-    } else if (direction === "down") {
+    } else if (direction === "down" && this.moveDownEnabled) {
       let movement = parseInt(rocketImage.style.bottom) - 10 + "px";
       rocketImage.style.bottom = movement;
       this.height = this.height - 10000;
@@ -75,17 +81,23 @@ export class AppComponent {
   handleBounds(rocketImage) {
     let height = parseInt(rocketImage.style.bottom);
     let leftAndRight = parseInt(rocketImage.style.left);
-    console.log(leftAndRight);
 
     if (
       height < 0 ||
       height > 330 ||
-      leftAndRight < -20 ||
-      leftAndRight > 170
+      leftAndRight < -19 ||
+      leftAndRight > 169
     ) {
       this.color = "orange";
     } else {
       this.color = "blue";
+    }
+
+    if (height < 0) {
+      this.color = "orange";
+      this.moveDownEnabled = false;
+    } else {
+      this.moveDownEnabled = true;
     }
   }
 }
