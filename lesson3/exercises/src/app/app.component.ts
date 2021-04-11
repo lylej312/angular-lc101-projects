@@ -83,21 +83,39 @@ export class AppComponent {
     let leftAndRight = parseInt(rocketImage.style.left);
 
     if (
-      height < 0 ||
-      height > 330 ||
+      height < 10 ||
+      height > 320 ||
       leftAndRight < -19 ||
-      leftAndRight > 169
+      leftAndRight > 460
     ) {
       this.color = "orange";
     } else {
       this.color = "blue";
     }
 
-    if (height < 0) {
-      this.color = "orange";
+    if (height < 10) {
       this.moveDownEnabled = false;
+      this.height = 0;
     } else {
       this.moveDownEnabled = true;
+    }
+
+    if (height > 320) {
+      this.moveUpEnabled = false;
+    } else {
+      this.moveUpEnabled = true;
+    }
+
+    if (leftAndRight < -19) {
+      this.moveLeftEnabled = false;
+    } else {
+      this.moveLeftEnabled = true;
+    }
+
+    if (leftAndRight > 460) {
+      this.moveRightEnabled = false;
+    } else {
+      this.moveRightEnabled = true;
     }
   }
 }

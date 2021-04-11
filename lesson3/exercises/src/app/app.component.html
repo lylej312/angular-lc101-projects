@@ -32,25 +32,25 @@
       <div *ngIf="!takeOffEnabled" class="container-right" b>
         <button
           (click)="moveRocket(rocketImage, 'up')"
-          [disabled]="takeOffEnabled"
+          [disabled]="takeOffEnabled || !moveUpEnabled"
         >
           Up
         </button>
         <button
           (click)="moveRocket(rocketImage, 'down')"
-          [disabled]="takeOffEnabled"
+          [disabled]="takeOffEnabled || !moveDownEnabled"
         >
           Down
         </button>
         <button
           (click)="moveRocket(rocketImage, 'right')"
-          [disabled]="takeOffEnabled"
+          [disabled]="takeOffEnabled || !moveRightEnabled"
         >
           Right
         </button>
         <button
           (click)="moveRocket(rocketImage, 'left')"
-          [disabled]="takeOffEnabled"
+          [disabled]="takeOffEnabled || !moveLeftEnabled"
         >
           Left
         </button>
